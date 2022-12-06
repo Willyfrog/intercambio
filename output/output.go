@@ -18,7 +18,6 @@ type Match struct {
 	Province      string
 	Country       string
 	Phone         string
-	CreatedAt     string
 }
 
 const OutputRow string = "{.SenderEmail},{.SenderName},{.ReceiverEmail},{.ReceiverName},{.Address1},{.Address2},{.City},{.Zip},{.Province},{.Country},{.Phone},{.CreatedAt}"
