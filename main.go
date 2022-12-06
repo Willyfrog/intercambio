@@ -4,7 +4,9 @@ import (
 	"flag"
 	"fmt"
 
+	"github.com/willyfrog/intercambio/algorithm"
 	input "github.com/willyfrog/intercambio/input"
+	"github.com/willyfrog/intercambio/output"
 )
 
 func main() {
@@ -20,4 +22,14 @@ func main() {
 		panic(err)
 	}
 	fmt.Printf("Loaded %v participants\n", len(origin))
+	results, err := algorithm.Run(origin)
+	if err != nil {
+		panic(err)
+	}
+	fmt.Printf("Created %v matches\n", len(results))
+	err = output.WriteCSV(results, *outputFile)
+	if err != nil {
+		panic(err)
+	}
+
 }
