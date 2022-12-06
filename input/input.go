@@ -23,7 +23,7 @@ type Row struct {
 }
 
 func LoadCSV(input string) ([]*Row, error) {
-	in, err := os.Open("clients.csv")
+	in, err := os.Open(input)
 	if err != nil {
 		panic(err)
 	}
