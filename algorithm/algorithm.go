@@ -2,7 +2,9 @@ package algorithm
 
 import (
 	"errors"
+	"fmt"
 	"math/rand"
+	"time"
 
 	"github.com/willyfrog/intercambio/input"
 	"github.com/willyfrog/intercambio/output"
@@ -18,6 +20,7 @@ func PopElement(slice []*input.Row, index int) ([]*input.Row, *input.Row) {
 }
 
 func random(slice []*input.Row) int {
+	fmt.Println("Initializing seed")
 	return rand.Intn(len(slice))
 }
 
@@ -38,6 +41,10 @@ func GenMatch(sender *input.Row, receiver *input.Row) *output.Match {
 	}
 }
 
+func init() {
+	rand.Seed(time.Now().UnixNano())
+}
+
 func Run(inputRows []*input.Row) ([]*output.Match, error) {
 	if len(inputRows) <= 1 {
 		return nil, errors.New("Number of elements is too low, we need at least 2")
@@ -46,10 +53,15 @@ func Run(inputRows []*input.Row) ([]*output.Match, error) {
 	original := inputRows[0]
 	sender := original
 	list := inputRows[1:]
+	var randInt int
 	var receiver *input.Row
+	var resultMatch *output.Match
 	for len(list) > 1 {
-		list, receiver = PopElement(list, random(list))
-		results = append(results, GenMatch(sender, receiver))
+		randInt = random(list)
+		list, receiver = PopElement(list, randInt)
+		resultMatch = GenMatch(sender, receiver)
+		results = append(results, resultMatch)
+		fmt.Printf("[%v] %v -> %v \n", randInt, resultMatch.SenderEmail, resultMatch.ReceiverEmail)
 		sender = receiver
 	}
 	results = append(results, GenMatch(sender, original))
