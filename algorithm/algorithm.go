@@ -13,6 +13,9 @@ import (
 // TODO: tests
 func PopElement(slice []*input.Row, index int) ([]*input.Row, *input.Row) {
 	element := slice[index]
+	if index == 0 {
+		return slice[1:], element
+	}
 	if index < len(slice)-1 {
 		return append(slice[:index], slice[index+1:]...), element
 	}
@@ -20,7 +23,6 @@ func PopElement(slice []*input.Row, index int) ([]*input.Row, *input.Row) {
 }
 
 func random(slice []*input.Row) int {
-	fmt.Println("Initializing seed")
 	return rand.Intn(len(slice))
 }
 
