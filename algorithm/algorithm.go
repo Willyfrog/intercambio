@@ -2,7 +2,6 @@ package algorithm
 
 import (
 	"errors"
-	"fmt"
 	"math/rand"
 	"time"
 
@@ -62,7 +61,7 @@ func Run(inputRows []*input.Row) ([]*output.Match, error) {
 		list, receiver = PopElement(list, randInt)
 		resultMatch = GenMatch(sender, receiver)
 		results = append(results, resultMatch)
-		fmt.Printf("[%v] %v -> %v \n", randInt, resultMatch.SenderEmail, resultMatch.ReceiverEmail)
+		//fmt.Printf("[%v] %v -> %v \n", randInt, resultMatch.SenderEmail, resultMatch.ReceiverEmail)
 		sender = receiver
 	}
 	results = append(results, GenMatch(sender, original))
