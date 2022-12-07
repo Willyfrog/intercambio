@@ -10,7 +10,6 @@ import (
 	"github.com/willyfrog/intercambio/output"
 )
 
-// TODO: tests
 func PopElement(slice []*input.Row, index int) ([]*input.Row, *input.Row) {
 	element := slice[index]
 	if index == 0 {
@@ -58,7 +57,7 @@ func Run(inputRows []*input.Row) ([]*output.Match, error) {
 	var randInt int
 	var receiver *input.Row
 	var resultMatch *output.Match
-	for len(list) > 1 {
+	for len(list) > 0 {
 		randInt = random(list)
 		list, receiver = PopElement(list, randInt)
 		resultMatch = GenMatch(sender, receiver)
